@@ -9,7 +9,24 @@ public class Ship : MonoBehaviour
     [SerializeField] KeyCode down = KeyCode.S;
     [SerializeField] KeyCode right = KeyCode.D;
     [SerializeField] KeyCode left = KeyCode.A;
+    [SerializeField] KeyCode turnRight = KeyCode.E;
+    [SerializeField] KeyCode turnLeft = KeyCode.Q;
     // Start is called before the first frame update
+
+    public int health = 100;
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Destroy(gameObject);
+    }
+
     void Start()
     {
 
@@ -34,5 +51,13 @@ public class Ship : MonoBehaviour
         {
             transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
         }
+        if (Input.GetKey(turnRight))
+        {
+            transform.Rotate(Vector3.back * speed * 20 * Time.deltaTime);
+        }
+        if (Input.GetKey(turnLeft))
+        {
+            transform.Rotate(Vector3.forward * speed * 20 * Time.deltaTime);
+        }    
     }
 }
