@@ -2,30 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+public class playerMovement : MonoBehaviour
 {
-    [SerializeField] float speed = 2;
+    [SerializeField] float speed = 5;
     [SerializeField] KeyCode up = KeyCode.W;
     [SerializeField] KeyCode down = KeyCode.S;
     [SerializeField] KeyCode right = KeyCode.D;
     [SerializeField] KeyCode left = KeyCode.A;
     [SerializeField] KeyCode turnRight = KeyCode.E;
     [SerializeField] KeyCode turnLeft = KeyCode.Q;
-    // Start is called before the first frame update
-
-    public int health = 100;
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-    void Die()
-    {
-        Destroy(gameObject);
-    }
 
     void Start()
     {
