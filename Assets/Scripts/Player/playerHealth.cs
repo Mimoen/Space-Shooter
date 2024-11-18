@@ -9,16 +9,22 @@ public class playerHealth : MonoBehaviour
     public float maxHealth;
     public Image healthBar;
 
+    private bool isDead;
+
+    public gameManagerScript gameManager;
     void Die()
     {
         Destroy(gameObject);
+        gameManager.gameOver();
+        Debug.Log("Game Over!");
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
+            isDead = true;
             Die();
         }
     }
@@ -32,10 +38,5 @@ public class playerHealth : MonoBehaviour
     void Update()
     {
         healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
-
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 }

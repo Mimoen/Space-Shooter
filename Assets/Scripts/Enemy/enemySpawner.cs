@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class enemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject enemyPrefab;
-
-    [SerializeField]
-    private float minimumSpawnTime;
-
-    [SerializeField]
-    private float maximumSpawnTime;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private float minimumSpawnTime;
+    [SerializeField] private float maximumSpawnTime;
 
     private float timeUntilSpawn;
-    
+    private GameObject player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     void Awake()
     {
         SetTimeUntilSpawn();
@@ -25,7 +26,7 @@ public class enemySpawner : MonoBehaviour
     {
         timeUntilSpawn -= Time.deltaTime;
 
-        if (timeUntilSpawn <= 0)
+        if (timeUntilSpawn <= 0 && player != null)
         {
             Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             SetTimeUntilSpawn();
